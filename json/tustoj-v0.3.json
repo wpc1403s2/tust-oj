@@ -1,0 +1,446 @@
+服务器URL：120.25.164.112:8080/tustoj/api
+将localhost:8080替换为120.25.164.112:8080/tustoj即可
+
+
+
+用户(user)
+
+
+1.登录：
+    http://localhost:8080/api/user/login
+    userPwd:qweasdzxc
+    userId:15103109
+
+成功：{"msg":"登陆成功","status":1,"token":{"userId":"15103109","recId":2,"token":"e8ff6e59c4866f04783b954edd347335"}}
+失败：{"msg":"用户名或密码错误","status":0}
+
+2.用户个人竞赛记录：
+    http://localhost:8080/api/user/user_contest
+    userId:15103109
+    token:e8ff6e59c4866f04783b954edd347335
+    recId=2
+
+成功：{"msg":null,"status":1,"data":[{"contestId":1001,"title":"比赛111","startTime":1493496000000,"endTime":1493510400000,"enrollNum":0,"description":"$#一场比赛"}]}
+失败：{"msg":"用户名为空","status":0}
+
+3.用户个人作业记录：
+    http://localhost:8080/api/user/homework_list
+    userId:15103109
+    token:e8ff6e59c4866f04783b954edd347335
+    recId=2
+成功：{"msg":null,"status":1,"data":[{"homeworkId":1001,"homeworkCreatorId":"1002","homeworkCreateTime":"1777333447","homeworkEndTime":"1363510400000","homeworkScore":0.0,"homeworkProblem":"1001 1002"}]}
+失败：{"msg":"用户名为空","status":0}
+
+4.用户课程记录：
+    http://localhost:8080/api/user/course_list
+    userId:15103109
+    token:e8ff6e59c4866f04783b954edd347335
+    recId=2
+成功：{"courseList":[{"deleteFlag":0,"courseName":"algorithm","courseSection":"一","courseWeek":"三 五","courseTeacher":"林lin","courseId":2,"courseTime":"1-18周双周"}],"status":1}
+失败：{"msg":"用户名为空","status":0}
+
+5.用户提交总数：
+    http://localhost:8080/api/user/personal_submit
+    userId:15103109
+    token:e8ff6e59c4866f04783b954edd347335
+    recId=2
+成功：{"personalSubmit":8,"status":1}
+
+问题（problem）
+
+
+1.插入：
+  http://localhost:8080/api/problem/insert
+  userId:15103109
+  token:e8ff6e59c4866f04783b954edd347335
+  recId=2
+      "title":"problem",
+    	"description":"描述",
+    	"input":"无需输入",
+    	"output":"output",
+    	"sampleInput":"",
+    	"sampleOutput":"output",
+    	"hint":"提示",
+      "source":"计算机学院",
+    	"inDate":1734232545123,
+    	"timeLimit":1000,
+    	"memoryLimit":128
+
+
+  成功：{"msg":"success!","status":1,"data":null}
+
+
+2.修改:
+  http://localhost:8080/api/problem/update
+  userId:15103109
+  token:e8ff6e59c4866f04783b954edd347335
+  recId=2
+	"problemId":1243,
+	"title":"及图同龙",
+
+	"description":"description",
+	"input":"input",
+	"output":"output",
+
+
+  成功：{"msg":"success!","status":1,"data":null}
+  失败：{"msg":"error","status":0,"data":null}
+
+3.删除:
+  http://localhost:8080/api/problem/delete
+  problemId:1250
+  userId:15103109
+  token:e8ff6e59c4866f04783b954edd347335
+  recId=2
+
+  成功：{"msg":"success!","status":1,"data":null}
+  失败：{"msg":"error","status":0,"data":null}
+
+4.一：获取单个问题:
+  http://localhost:8080/api/problem/queryDetail
+  problemId=1234
+  userId:15103109
+  token:e8ff6e59c4866f04783b954edd347335
+  recId=2
+  成功:{"msg":"problem detail","status":1,"data":{"problemId":1234,"title":"连续自然数和","source":"吉首大学软件学院","inDate":1493535904000,"timeLimit":1,"memoryLimit":128,"accepted":0,"submit":0,"description":"<p><font size=\"3\" face=\"Times New Roman\">对一个给定的自然数M，求出所有的连续的自然数段（连续个数大于1），这些连续的自然数段中的全部数之和为M。  <br />\n例子：1998+1999+2000+2001+2002 = 10000，所以从1998到2002的一个自然数段为M=10000的一个解。</font></p>","input":"<p><font size=\"3\" face=\"Times New Roman\">包含一个整数的单独一行给出M的值（10 &lt;= M &lt;= 2,000,000）</font></p>","output":"<p><font size=\"3\" face=\"Times New Roman\">每行两个自然数，给出一个满足条件的连续自然数段中的第一个数和最后一个数，两数之间用一个空格隔开，所有输出行的第一个按从小到大的升序排列，对于给定的输入数据，保证至少有一个解。</font></p>","sampleInput":"10000\n\n21334\n\n2000000","sampleOutput":"18 142 \n297 328 \n388 412 \n1998 2002\n\n5332 5335\n\n923 2202\n2888 3512\n7685 7940\n15938 16062\n79988 80012\n399998 400002","hint":""}}
+
+5.分页展示:
+  http://localhost:8080/api/problem/query
+  pageNow=1
+  userId:15103109
+  token:e8ff6e59c4866f04783b954edd347335
+  recId=2
+
+  成功:{"msg":"248","status":1,"data":[{"problemId":1000,"title":"C语言程序设计教程（第三版）课后习题1.5","source":"","inDate":1493492785000,"timeLimit":1,"memoryLimit":128,"accepted":2,"submit":2,"description":"<p>请参照本章例题，编写一个C程序，输出以下信息：</p>\n<p>**************************</br>\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Very&nbsp;&nbsp;&nbsp; Good!</br>\n**************************</p>\n<p>数＊号可看出，Very前面9空格，Good前面&hellip;&hellip;</p>\n<p>*也是输出的一部分，别光打印Very Good!</p>","input":"<p>无需输入</p>","output":"<p>**************************</br>\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Very&nbsp;&nbsp;&nbsp; Good!</br>\n**************************</p>","sampleInput":"","sampleOutput":"**************************\n         Very    Good!\n**************************","hint":""}
+  (1页20个，省略剩余19个结果。。。)
+  (msg:返回总数)
+  为空:{"msg":"problemList","status":1,"data":[]}
+
+6.按标题分页模糊查找:
+  ht一：tp://localhost:8080/api/problem/queryByTitle
+  pageNow=1
+  title=C语言
+  userId:15103109
+  token:e8ff6e59c4866f04783b954edd347335
+  recId=2
+
+  成功:{"msg":"93","status":1,"data":[{"problemId":1000,"title":"C语言程序设计教程（第三版）课后习题1.5","source":"","inDate":1493492785000,"timeLimit":1,"memoryLimit":128,"accepted":2,"submit":2,"description":"<p>请参照本章例题，编写一个C程序，输出以下信息：</p>\n<p>**************************</br>\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Very&nbsp;&nbsp;&nbsp; Good!</br>\n**************************</p>\n<p>数＊号可看出，Very前面9空格，Good前面&hellip;&hellip;</p>\n<p>*也是输出的一部分，别光打印Very Good!</p>","input":"<p>无需输入</p>","output":"<p>**************************</br>\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Very&nbsp;&nbsp;&nbsp; Good!</br>\n**************************</p>","sampleInput":"","sampleOutput":"**************************\n         Very    Good!\n**************************","hint":""}
+    (省略剩下结果)
+  失败：{"msg":"数据为空","status":0,"data":null}
+
+
+6.按Id分页模糊查找:
+  http://localhost:8080/api/problem/queryById
+  pageNow=1
+  problemId=1240
+  userId:15103109
+  token:e8ff6e59c4866f04783b954edd347335
+  recId=2
+
+  成功：{"msg":"1","status":1,"data":[{"problemId":1240,"title":"防御导弹","source":"吉首大学软件学院","inDate":1493535904000,"timeLimit":1,"memoryLimit":128,"accepted":0,"submit":0,"description":"<p><font size=\"3\" face=\"Times New Roman\">某国为了防御敌国的导弹袭击，发展出一种导弹拦截系统。但是这种导弹拦截 系统有一个缺陷：虽然它的第一发炮弹能够达到任意的高度，但是以后每一发炮弹都不能高于前一发的高度。某天，雷达捕捉到敌国的导弹来袭。由于该系统还在试 用阶段，所以只有一套系统，因此有可能不能拦截所有的导弹。</font></p>","input":"<p><font size=\"3\" face=\"Times New Roman\">最多20个整数，分别表示导弹依次飞来的高度（雷达给出高度数据是不大于30000的正整数）</font></p>","output":"<p><font size=\"3\" face=\"Times New Roman\">整数M。表示：这套系统最多能拦截 M 枚导弹.</font></p>","sampleInput":"300 250 275 252 200 138 245","sampleOutput":"5","hint":""}]}
+
+
+新闻(news)
+
+
+1.插入：
+      http://localhost:8080/api/news/insert
+      userId:15103109
+      token:e8ff6e59c4866f04783b954edd347335
+      recId=2
+      {
+	"title":"新闻",
+	"picUrl":"http://images2015.cnblogs.com/blog/827473/201511/827473-20151106215408914-1144457297.png",
+	"userId":"15103109",
+	"content":"内容",
+	"isTop":"0", //0：不置顶 1：置顶
+	"weight":1, //权重
+	"addTime":1500987968083
+}
+成功:{"msg":"success!","status":1,"data":null}
+失败：{"msg":"error","status":0,"data":null}
+
+2.删除:
+      http://localhost:8080/api/news/delete
+      newsId=3
+      userId:15103109
+      token:e8ff6e59c4866f04783b954edd347335
+      recId=2
+成功：{"msg":"success!","status":1,"data":null}
+失败：{"msg":"error","status":0,"data":null}
+3.修改:
+      http://localhost:8080/api/news/update
+      userId:15103109
+      token:e8ff6e59c4866f04783b954edd347335
+      recId=2
+      {
+	"newsId":3,
+	"title":"新123闻",
+
+
+	"pic_url":"http://images2015.cnblogs.com/blog/827473/201511/827473-20151106215408914-1144457297.png",
+	"user_id":"15103109",
+	"content":"内容",
+	"is_top":"0",
+	"is_report":0,//0：待审核 1：审核通过 -1：未通过
+	"weight":1,
+	"add_time":"2017-1-1 12:00:00"
+}
+成功：{"msg":"success!","status":1,"data":null}
+失败：{"msg":"error","status":0,"data":null}
+4.分页展示:
+      http://localhost:8080/api/news/query
+      userId:15103109
+      token:e8ff6e59c4866f04783b954edd347335
+      recId=2
+      pageNow=1
+      成功：{"msg":"4","status":1,"data":[{"newsId":4,"title":"新闻","picUrl":"http://images2015.cnblogs.com/blog/827473/201511/827473-20151106215408914-1144457297.png","userId":"15103109","isTop":1,"isReport":0,"weight":1,"addTime":"1500987968083","content":"内容"},{"newsId":2,"title":"文章标题","picUrl":"封面图片的地址","userId":"admin","isTop":1,"isReport":0,"weight":1,"addTime":"1484385311991","content":"文章内容"},{"newsId":1,"title":"文章标题","picUrl":"封面图片的地址","userId":"admin","isTop":0,"isReport":0,"weight":1,"addTime":"1484385311991","content":"文章内容"},{"newsId":3,"title":"新123闻","picUrl":"http://images2015.cnblogs.com/blog/827473/201511/827473-20151106215408914-1144457297.png","userId":"15103109","isTop":0,"isReport":0,"weight":1,"addTime":"1384385311991","content":"内容"}]}
+
+
+5.按标题分页模糊查找:
+      http://localhost:8080/api/news/queryByTitle
+      pageNow=1
+      title=文章标题
+      userId:15103109
+      token:e8ff6e59c4866f04783b954edd347335
+      recId=2
+      pageNow=1
+      成功：{"msg":"1","status":1,"data":[{"newsId":4,"title":"新闻","picUrl":"http://images2015.cnblogs.com/blog/827473/201511/827473-20151106215408914-1144457297.png","userId":"15103109","isTop":1,"isReport":0,"weight":1,"addTime":"1500987968083","content":"内容"}]}
+      失败:{"msg":"数据为空","status":0,"data":null}
+
+提交结果(solution)
+
+
+1.插入:
+    http://localhost:8080/api/solution/insert
+    userId:15103109
+    token:e8ff6e59c4866f04783b954edd347335
+    recId=2
+      {
+	"problemId":1008,
+	"userId":"15103109",
+	"time":888,
+	"inDate":124066778,
+	"memory":1000,
+	"result":0,
+	"language":1,//使用语言 0：C 1：C++ 3：Java
+	"ip":"127.0.0.1",
+  "contestId":,
+	"codeLength":123,
+	"judger":"admin"
+}
+成功：{"msg":"success!","status":1,"data":null}
+失败：{"msg":"error","status":0,"data":null}
+
+2.删除:
+      http://localhost:8080/api/solution/delete
+      solutionId=1077
+      userId:15103109
+      token:e8ff6e59c4866f04783b954edd347335
+      recId=2
+成功：{"msg":"success!","status":1,"data":null}
+失败：{"msg":"error","status":0,"data":null}
+
+3.修改:
+      http://localhost:8080/api/solution/update
+      userId:15103109
+      token:e8ff6e59c4866f04783b954edd347335
+      recId=2
+      {
+	"solutionId":1077,
+	"problemId":1008,
+	"userId":"15103109",
+	"codeLength":12
+
+}
+成功：{"msg":"success!","status":1,"data":null}
+失败：{"msg":"error","status":0,"data":null}
+
+4.分页展示:
+      http://localhost:8080/api/solution/query
+      pageNow:1
+      userId:14101118
+      token:3d08ff652d24d5799720a6482756ad27
+      recId:1
+成功：{"msg":"76","status":1,"data":[{"solutionId":1001,"problemId":1000,"userId":"14101118","time":0,"memory":1088,"inDate":1493492785000,"result":4,"language":1,"contestId":null,"codeLength":143,"judgetime":1493463985000,"judger":"admin"},{"solutionId":1002,"problemId":1001,"userId":"14101118","time":0,"memory":1092,"inDate":1493492785000,"result":4,"language":0,"contestId":null,"codeLength":155,"judgetime":1493463985000,"judger":"admin"}
+(省略剩余结果)
+  失败：{"msg":"数据为空","status":0,"data":null}
+
+5.按问题id分页查找：
+    http://localhost:8080/api/solution/queryByProblemId
+    problemId=1001
+    pageNow=1
+    userId:14101118
+    token:3d08ff652d24d5799720a6482756ad27
+    recId:1
+成功：{"msg":"3","status":1,"data":[{"solutionId":1002,"problemId":1001,"userId":"14101118","time":0,"memory":1092,"inDate":1493492785000,"result":4,"language":0,"contestId":null,"codeLength":155,"judgetime":1493463985000,"judger":"admin"},{"solutionId":1075,"problemId":1001,"userId":"14101118","time":0,"memory":1092,"inDate":1493829198000,"result":4,"language":0,"contestId":null,"codeLength":237,"judgetime":1493800399000,"judger":"admin"},{"solutionId":1076,"problemId":1001,"userId":"14101118","time":0,"memory":0,"inDate":1493830274000,"result":11,"language":0,"contestId":null,"codeLength":113,"judgetime":1493801475000,"judger":"admin"}]}
+失败：{"msg":"数据为空","status":0,"data":null}
+
+6.单个solution结果:
+    http://localhost:8080/api/solution/queryDetail
+    solutionId=1003
+    userId:14101118
+    token:3d08ff652d24d5799720a6482756ad27
+    recId:1
+
+成功：{"msg":null,"status":1,"data":{"solutionId":1001,"problemId":1000,"userId":"14101118","time":0,"memory":1088,"inDate":1493492785000,"result":4,"language":1,"contestId":null,"codeLength":143,"judgetime":1493463985000,"judger":"admin"}}
+失败:{"msg":"empty","status":0,"data":null}
+
+
+课程(course)
+
+
+1.插入：
+    http://localhost:8080/api/course/insert
+    userId:14101118
+    token:3d08ff652d24d5799720a6482756ad27
+    recId:1
+    {
+    	"courseName":"数据结构",
+
+    	"courseTeacher":"mr",
+    	"courseTime":"1-18周单周",
+
+    	"courseWeek":"一，三",
+
+    	"courseSection":"四"
+
+    }
+成功：{"msg":"success!","status":1,"data":null}
+失败：{"msg":"error","status":0,"data":null}
+
+2.删除：
+    http://localhost:8080/api/course/delete
+    userId:14101118
+    token:3d08ff652d24d5799720a6482756ad27
+    recId:1
+    courseId:6
+  成功：{"msg":"success!","status":1,"data":null}
+  失败：{"msg":"error","status":0,"data":null}
+
+3.修改：
+    http://localhost:8080/api/course/update
+    userId:14101118
+    token:3d08ff652d24d5799720a6482756ad27
+    recId:1
+    {
+
+	"courseId":6,
+	"courseName":"数据结构",
+
+	"courseTeacher":"aaaaa"
+
+}
+成功：{"msg":"success!","status":1,"data":null}
+失败：{"msg":"error","status":0,"data":null}
+
+4.获取单个：
+    http://localhost:8080/api/course/queryDetail
+    userId:14101118
+    token:3d08ff652d24d5799720a6482756ad27
+    recId:1
+    courseId:7
+成功：{"msg":null,"status":1,"data":{"courseId":6,"courseName":"数据结构","courseTeacher":"aaaaa","courseTime":"1-18周单周","courseWeek":"一，三","courseSection":"四","deleteFlag":0}}
+失败：{"msg":"empty","status":0,"data":null}
+
+5.分页展示：
+    http://localhost:8080/api/course/query?pageNow=1
+    userId:14101118
+    token:3d08ff652d24d5799720a6482756ad27
+    recId:1
+成功：{"msg":"5","status":1,"data":[{"courseId":2,"courseName":"algorithm","courseTeacher":"林lin","courseTime":"1-18周双周","courseWeek":"三 五","courseSection":"一"},{"courseId":3,"courseName":"algorithim","courseTeacher":"lin","courseTime":"1-18周","courseWeek":"二 四","courseSection":"一"},{"courseId":4,"courseName":"algorithi im","courseTeacher":"linn","courseTime":"1-18i周","courseWeek":"二 四","courseSection":"一"},{"courseId":5,"courseName":"数据结构","courseTeacher":"mr","courseTime":"1-18周单周","courseWeek":"一，三","courseSection":"四"},{"courseId":7,"courseName":"数据结构","courseTeacher":"mr","courseTime":"1-18周单周","courseWeek":"一，三","courseSection":"四"}]}
+失败：{"msg":"数据为空","status":0,"data":null}
+
+6.按教师名分页模糊查找：
+    http://localhost:8080/api/course/queryByTeacher
+    pageNow:1
+    teacherName:mr
+    userId:14101118
+    token:3d08ff652d24d5799720a6482756ad27
+    recId:1
+成功：{"msg":"2","status":1,"data":[{"courseId":5,"courseName":"数据结构","courseTeacher":"mr","courseTime":"1-18周单周","courseWeek":"一，三","courseSection":"四"},{"courseId":7,"courseName":"数据结构","courseTeacher":"mr","courseTime":"1-18周单周","courseWeek":"一，三","courseSection":"四"}]}
+失败：{"msg":"数据为空","status":0,"data":null}
+
+7.按课程名分页模糊查找：
+    http://localhost:8080/api/course/queryByCourse
+    pageNow:1
+    courseName:数据结构
+    userId:14101118
+    token:3d08ff652d24d5799720a6482756ad27
+    recId:1
+成功：{"msg":"2","status":1,"data":[{"courseId":5,"courseName":"数据结构","courseTeacher":"mr","courseTime":"1-18周单周","courseWeek":"一，三","courseSection":"四"},{"courseId":7,"courseName":"数据结构","courseTeacher":"mr","courseTime":"1-18周单周","courseWeek":"一，三","courseSection":"四"}]}
+失败：{"msg":"数据为空","status":0,"data":null}
+
+比赛(contest)
+
+
+1.插入：
+    http://localhost:8080/api/contest/insert
+    userId:14101118
+    token:3d08ff652d24d5799720a6482756ad27
+    recId:1
+    {
+	"title":"比赛",
+
+	"startTime":1277335465,
+	"endTime":1377335465,
+	"description":"一场比赛",
+
+	"privateFlag":0,// 1：需要密码 0：不需要
+  "password":123456
+}
+成功：{"msg":"success!","status":1,"data":null}
+失败：{"msg":"error","status":0,"data":null}
+
+2.删除：
+    http://localhost:8080/api/contest/delete
+    contestId：1001
+    userId:14101118
+    token:3d08ff652d24d5799720a6482756ad27
+    recId:1
+成功：{"msg":"success!","status":1,"data":null}
+失败：{"msg":"error","status":0,"data":null}
+
+3.修改：
+    http://localhost:8080/api/contest/update
+    userId:14101118
+    token:3d08ff652d24d5799720a6482756ad27
+    recId:1
+    {
+	"contestId":1001,
+	"title":"比赛111",
+
+	"description":"$#一场比赛"
+
+}
+成功：{"msg":"success!","status":1,"data":null}
+失败：{"msg":"error","status":0,"data":null}
+
+4.获取单个：
+    1http://localhost:8080/api/contest/queryDetail
+    contestId：1001
+    userId:14101118
+    token:3d08ff652d24d5799720a6482756ad27
+    recId:1
+成功：{"msg":null,"status":1,"data":{"contestId":1001,"title":"比赛111","startTime":1493496000000,"endTime":1493510400000,"defunct":"N","privateFlag":0,"langmask":262132,"password":"123456","enrollNum":0,"deleteFlag":0,"description":"$#一场比赛"}}
+失败：{"msg":"empty","status":0,"data":null}
+
+5.分页展示：
+    http://localhost:8080/api/contest/query
+    pageNow：1
+    userId:14101118
+    token:3d08ff652d24d5799720a6482756ad27
+    recId:1
+成功：{"msg":"10","status":1,"data":[{"contestId":1001,"title":"比赛111","startTime":1493496000000,"endTime":1493510400000,"enrollNum":0,"description":"$#一场比赛"},{"contestId":1002,"title":"比赛","startTime":1277335000,"endTime":1377335000,"enrollNum":0,"description":"一场比赛"},{"contestId":1003,"title":"contest","startTime":1500443000,"endTime":1510443000,"enrollNum":0,"description":"des"},{"contestId":1004,"title":"contest","startTime":2500443000,"endTime":2510443000,"enrollNum":0,"description":"des"},{"contestId":1005,"title":"contest","startTime":25000443000,"endTime":25100443000,"enrollNum":0,"description":"des"},{"contestId":1006,"title":"contest","startTime":2500000443000,"endTime":2510000443000,"enrollNum":0,"description":"des"},{"contestId":1007,"title":"contest","startTime":2000000443000,"endTime":2010000443000,"enrollNum":0,"description":"des"},{"contestId":1008,"title":"contest","startTime":1600000443000,"endTime":1610000443000,"enrollNum":0,"description":"des"},{"contestId":1009,"title":"contest","startTime":1400000443000,"endTime":1410000443000,"enrollNum":0,"description":"des"},{"contestId":1010,"title":"contest","startTime":1400000443000,"endTime":1610000443000,"enrollNum":0,"description":"des"}]}
+失败：{"msg":"数据为空","status":0,"data":null}
+
+6.按标题分页模糊查找：
+
+    http://localhost:8080/api/contest/queryByTitle
+    pageNow：1
+    title：比赛
+    userId:14101118
+    token:3d08ff652d24d5799720a6482756ad27
+    recId:1
+成功：{"msg":"2","status":1,"data":[{"contestId":1001,"title":"比赛111","startTime":1493496000000,"endTime":1493510400000,"enrollNum":0,"description":"$#一场比赛"},{"contestId":1002,"title":"比赛","startTime":1277335000,"endTime":1377335000,"enrollNum":0,"description":"一场比赛"}]}
+失败：{"msg":"数据为空","status":0,"data":null}
